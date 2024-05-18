@@ -1,14 +1,12 @@
 import pandas as pd
-from save import save_file
-from read import read_file
+from file_management import save_file, read_file
 
-
-def merge_files(file_paths, columns):
+def merge_files(file_paths: list, columns: list) -> pd.DataFrame:
     data_frames = []
 
     for file_path in file_paths:
         try:
-            df = read_file(file_path, columns)
+            df = read_file(file_path)
             if df is not None:
                 for col in columns:
                     if col not in df.columns:
@@ -26,7 +24,7 @@ def merge_files(file_paths, columns):
         return None
 
 
-def execute_simple_merge(file_paths, columns, output_path):
+def execute_simple_merge(file_paths: list, columns: list, output_path: str) -> None:
     data = merge_files(file_paths, columns)
     if data is not None:
         save_file(output_path, data)

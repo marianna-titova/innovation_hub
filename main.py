@@ -1,4 +1,4 @@
-from simple_merge import execute_simple_merge
+from merge import execute_simple_merge
 
 
 def main():

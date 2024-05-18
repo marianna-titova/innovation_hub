@@ -5,7 +5,20 @@ from odf.table import Table, TableRow, TableCell
 from odf.text import P
 
 
-def read_ods(file_path, columns):
+def read_file(file_path: str) -> pd.DataFrame:
+    ext = os.path.splitext(file_path)[1].lower()
+    if ext == '.csv':
+        return pd.read_csv(file_path)
+    elif ext in ['.xls', '.xlsx']:
+        return pd.read_excel(file_path)
+    elif ext == '.ods':
+        return read_ods(file_path)
+    else:
+        print(f"Unsupported file extension: {ext}")
+        return None
+
+
+def read_ods(file_path: str) -> pd.DataFrame:
     doc = load(file_path)
     table = doc.spreadsheet.getElementsByType(Table)[0]
 
@@ -23,21 +36,4 @@ def read_ods(file_path, columns):
     df = pd.DataFrame(rows)
     df.columns = df.iloc[0]
     df = df[1:]
-
-    if all(col in df.columns for col in columns):
-        return df[columns]
-    else:
-        print(f"Skipping {file_path}: missing required columns")
-        return None
-
-
-def read_file(file_path, columns):
-    ext = os.path.splitext(file_path)[1].lower()
-    if ext == '.csv':
-        return pd.read_csv(file_path, usecols=columns)
-    elif ext in ['.xls', '.xlsx']:
-        return pd.read_excel(file_path, usecols=columns)
-    elif ext == '.ods':
-        return read_ods(file_path, columns)
-    else:
-        raise ValueError(f"Unsupported file extension: {ext}")
+    return df
