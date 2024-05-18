@@ -33,7 +33,5 @@ def read_ods(file_path: str) -> pd.DataFrame:
             cell_values.append(cell_value)
         rows.append(cell_values)
 
-    df = pd.DataFrame(rows)
-    df.columns = df.iloc[0]
-    df = df[1:]
+    df = pd.DataFrame(rows[1:], columns=rows[0])
     return df

@@ -18,7 +18,10 @@ def merge_files(file_paths: list, columns: list) -> pd.DataFrame:
 
     if data_frames:
         merged_df = pd.concat(data_frames, ignore_index=True)
-        return merged_df
+        cleaned_df = pd.DataFrame({col: merged_df[col].dropna().reset_index(drop=True) for col in merged_df.columns})
+
+        return cleaned_df
+
     else:
         print("No files to merge")
         return None

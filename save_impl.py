@@ -10,7 +10,7 @@ def save_file(output_path: str, data: pd.DataFrame) -> None:
     if ext == '.csv':
         data.to_csv(output_path, index=False)
     elif ext in ['.xls', '.xlsx']:
-        data.to_excel(output_path, index=False)
+        data.to_excel(output_path, index=False, engine='openpyxl')
     elif ext == '.ods':
         save_ods(output_path, data)
     else:
