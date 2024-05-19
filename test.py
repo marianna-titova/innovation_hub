@@ -1,7 +1,7 @@
 import unittest
 import pandas as pd
 from merge import execute_simple_merge
-from file_management import save_ods, read_ods, read_file
+from file_management import save_file, read_file
 
 
 class TestMergeFilesVertically(unittest.TestCase):
@@ -25,7 +25,7 @@ class TestMergeFilesVertically(unittest.TestCase):
             'b': [13, 14, 15],
             'c': [16, 17, 18]
         })
-        save_ods(self.ods_file, df_ods)
+        save_file(self.ods_file, df_ods)
 
         self.file_paths = [self.csv_file, self.excel_file, self.ods_file]
 
@@ -40,7 +40,7 @@ class TestMergeFilesVertically(unittest.TestCase):
             'b': [4, 5, 6, 13, 14, 15]
         })
 
-        actual_df = read_ods(output_path)
+        actual_df = read_file(output_path)
         actual_df = actual_df.apply(pd.to_numeric, errors='coerce')
         pd.testing.assert_frame_equal(expected_df, actual_df)
 
@@ -73,6 +73,8 @@ class TestMergeFilesVertically(unittest.TestCase):
 
         actual_df = read_file(output_path)
         actual_df = actual_df.apply(pd.to_numeric, errors='coerce')
+        print(expected_df)
+        print(actual_df)
         pd.testing.assert_frame_equal(expected_df, actual_df)
 
 

@@ -9,7 +9,7 @@ def main():
     # output_file = input("Enter output file name (available formats: csv, xls, xlsx): ").strip().lower()
     file_names = ["test1.ods", "test2.ods"]
     columns = ["test1", "test2"]
-    output_file = "test_vert.ods"
+    output_file = "/home/nl_marianne/Dev/test_vert.ods"
 
     execute_simple_merge(file_names, columns, output_file)
 

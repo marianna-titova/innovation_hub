@@ -11,6 +11,7 @@ def merge_files(file_paths: list, columns: list) -> pd.DataFrame:
                 for col in columns:
                     if col not in df.columns:
                         df[col] = pd.NA
+
                 df = df[columns]
                 data_frames.append(df)
         except Exception as e:
@@ -21,15 +22,15 @@ def merge_files(file_paths: list, columns: list) -> pd.DataFrame:
         cleaned_df = pd.DataFrame({col: merged_df[col].dropna().reset_index(drop=True) for col in merged_df.columns})
 
         return cleaned_df
-
     else:
         print("No files to merge")
         return None
 
 
-def execute_simple_merge(file_paths: list, columns: list, output_path: str) -> None:
+def execute_simple_merge(file_paths: list, columns: list, output_path: str) -> str:
     data = merge_files(file_paths, columns)
     if data is not None:
-        save_file(output_path, data)
+            return  save_file(output_path, data)
     else:
         print("Exiting: No data to save")
+        return None

@@ -5,7 +5,20 @@ from odf.table import Table, TableRow, TableCell
 from odf.text import P
 
 
-def save_file(output_path: str, data: pd.DataFrame) -> None:
+def get_unique_file_name(output_path):
+    base, ext = os.path.splitext(output_path)
+    counter = 1
+    new_output_path = output_path
+
+    while os.path.exists(new_output_path):
+        new_output_path = f"{base} ({counter}){ext}"
+        counter += 1
+
+    return new_output_path
+
+
+def save_file(output_path: str, data: pd.DataFrame) -> str:
+    output_path = get_unique_file_name(output_path)
     ext = os.path.splitext(output_path)[1].lower()
     if ext == '.csv':
         data.to_csv(output_path, index=False)
@@ -15,7 +28,9 @@ def save_file(output_path: str, data: pd.DataFrame) -> None:
         save_ods(output_path, data)
     else:
         print(f"Unsupported output file extension: {ext}")
+        return None
     print(f"Merged file saved as {output_path}")
+    return output_path
 
 
 def save_ods(output_path: str, data: pd.DataFrame) -> None:
