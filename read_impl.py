@@ -1,11 +1,13 @@
 import pandas as pd
+from pandas import DataFrame
+from typing import Tuple, List, Any, Set
 import os
 from odf.opendocument import load
 from odf.table import Table, TableRow, TableCell
 from odf.text import P
 
 
-def read_file(file_path: str) -> pd.DataFrame:
+def read_file(file_path: str) -> DataFrame | None:
     ext = os.path.splitext(file_path)[1].lower()
     if ext == '.csv':
         return pd.read_csv(file_path)
@@ -18,9 +20,11 @@ def read_file(file_path: str) -> pd.DataFrame:
         return None
 
 
-def read_ods(file_path: str) -> pd.DataFrame:
+def read_ods(file_path: str) -> DataFrame | None:
     doc = load(file_path)
     table = doc.spreadsheet.getElementsByType(Table)[0]
+    if table is None:
+        return None
 
     rows = []
     for row in table.getElementsByType(TableRow):

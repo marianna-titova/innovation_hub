@@ -1,7 +1,10 @@
 import pandas as pd
+from typing import List
+from pandas import DataFrame
 from file_management import save_file, read_file
 
-def merge_files(file_paths: list, columns: list) -> pd.DataFrame:
+
+def merge_files(file_paths: List[str], columns: List[str]) -> DataFrame | None:
     data_frames = []
 
     for file_path in file_paths:
@@ -27,10 +30,10 @@ def merge_files(file_paths: list, columns: list) -> pd.DataFrame:
         return None
 
 
-def execute_simple_merge(file_paths: list, columns: list, output_path: str) -> str:
+def execute_simple_merge(file_paths: List[str], columns: List[str], output_path: str) -> str | None:
     data = merge_files(file_paths, columns)
     if data is not None:
-            return  save_file(output_path, data)
+        return save_file(output_path, data)
     else:
         print("Exiting: No data to save")
         return None
