@@ -1,0 +1,48 @@
+
+
+body {
+    background-color: #1A1A1A;
+    color: white;
+}
+
+.merge-option {
+    position: relative;
+    display: inline-block;
+    margin: 10px;
+    cursor: pointer;
+    text-align: center;
+    width: 100%;
+}
+.merge-option img {
+    width: 100%;
+}
+.merge-option h4 {
+    margin: 0;
+    padding: 5px;
+}
+
+.merge-description {
+    margin-bottom: 10px;
+}
+
+button {
+    display: none;
+}
+
+.toggle-button {
+    background-color: #007BFF;
+    color: red;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 12px;
+}
+
+
+
+
