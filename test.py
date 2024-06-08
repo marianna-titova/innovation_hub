@@ -6,21 +6,21 @@ from file_management import save_file, read_file
 
 class TestMergeFilesVertically(unittest.TestCase):
     def setUp(self):
-        self.csv_file = 'test1.csv'
+        self.csv_file = 'data/test1.csv'
         df_csv = pd.DataFrame({
             'a': [1, 2, 3],
             'b': [4, 5, 6]
         })
         df_csv.to_csv(self.csv_file, index=False)
 
-        self.excel_file = 'test2.xlsx'
+        self.excel_file = 'data/test2.xlsx'
         df_excel = pd.DataFrame({
             'a': [7, 8, 9],
             'c': [10, 11, 12]
         })
         df_excel.to_excel(self.excel_file, index=False, engine='openpyxl')
 
-        self.ods_file = 'test3.ods'
+        self.ods_file = 'data/test3.ods'
         df_ods = pd.DataFrame({
             'b': [13, 14, 15],
             'c': [16, 17, 18]
@@ -31,7 +31,7 @@ class TestMergeFilesVertically(unittest.TestCase):
 
     def test_merge_ods(self):
         columns = ['a', 'b']
-        output_path = 'merged_output.ods'
+        output_path = 'data/merged_output.ods'
 
         execute_simple_merge(self.file_paths, columns, output_path)
 
@@ -46,7 +46,7 @@ class TestMergeFilesVertically(unittest.TestCase):
 
     def test_merge_csv(self):
         columns = ['a', 'c']
-        output_path = 'merged_output.csv'
+        output_path = 'data/merged_output.csv'
 
         execute_simple_merge(self.file_paths, columns, output_path)
 
@@ -61,7 +61,7 @@ class TestMergeFilesVertically(unittest.TestCase):
 
     def test_merge_excel(self):
         columns = ['a', 'b', 'c']
-        output_path = 'merged_output.xls'
+        output_path = 'data/merged_output.xls'
 
         execute_simple_merge(self.file_paths, columns, output_path)
 

@@ -1,11 +1,12 @@
 from pandas import DataFrame
 from read_impl import (read_file as read_file_impl)
 from save_impl import (save_file as save_file_impl)
+from streamlit.runtime.uploaded_file_manager import UploadedFile
 
 
-def read_file(file_path: str) -> DataFrame | None:
+def read_file(file: UploadedFile | str) -> DataFrame | None:
     """Reads a CSV/XLS/XLSX file and returns a DataFrame."""
-    return read_file_impl(file_path)
+    return read_file_impl(file)
 
 
 def save_file(output_path: str, data: DataFrame) -> str:

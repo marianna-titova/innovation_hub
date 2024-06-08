@@ -13,9 +13,7 @@ body {
     text-align: center;
     width: 100%;
 }
-.merge-option img {
-    width: 100%;
-}
+
 .merge-option h4 {
     margin: 0;
     padding: 5px;
@@ -25,24 +23,17 @@ body {
     margin-bottom: 10px;
 }
 
-button {
-    display: none;
+img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    aspect-ratio: 1 / 0.6;
+
 }
 
-.toggle-button {
-    background-color: #007BFF;
-    color: red;
-    border: none;
-    padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
-    border-radius: 12px;
+.stButton button {
+    width: 220px;
 }
-
 
 
 

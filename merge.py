@@ -1,7 +1,23 @@
 from simple_merge_impl import (execute_simple_merge as impl_execute_simple_merge)
 from typing import List
+from sophisticated_merge_impl import (soph_merge_mode1 as soph_merge_mode1_impl,
+                                      soph_merge_mode2 as soph_merge_mode2_impl,
+                                      soph_merge_mode3 as soph_merge_mode3_impl)
+
+from streamlit.runtime.uploaded_file_manager import UploadedFile
+from pandas import DataFrame
 
 
-def execute_simple_merge(file_paths: List[str], columns: List[str], output_path: str) -> str | None:
+def execute_simple_merge(files: List[UploadedFile], columns: List[str], output_path: str) -> str | None:
     """Merges multiple files and saves the DataFrame to a file"""
-    return impl_execute_simple_merge(file_paths, columns, output_path)
+    return impl_execute_simple_merge(files, columns, output_path)
+
+def soph_merge_mode1(data: DataFrame, by: str) -> DataFrame:
+    return soph_merge_mode1_impl(data, by)
+
+def soph_merge_mode2():
+    soph_merge_mode2_impl()
+
+def soph_merge_mode3():
+    soph_merge_mode3_impl()
+
