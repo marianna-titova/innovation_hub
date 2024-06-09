@@ -29,6 +29,7 @@ def merge_files(file_objects: List[UploadedFile], columns: List[str]) -> DataFra
         print("No files to merge")
         return None
 
+
 def execute_simple_merge(file_objects: List[UploadedFile], columns: List[str], output_path: str) -> str | None:
     data = merge_files(file_objects, columns)
     if data is not None:

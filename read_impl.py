@@ -1,10 +1,6 @@
 import pandas as pd
 from pandas import DataFrame
-from typing import Tuple, List, Any, Set
 import os
-from odf.opendocument import load
-from odf.table import Table, TableRow, TableCell
-from odf.text import P
 from streamlit.runtime.uploaded_file_manager import UploadedFile
 import io
 import streamlit as st
@@ -34,6 +30,7 @@ def read_file(file: UploadedFile | str) -> DataFrame | None:
         st.error(f"Unsupported file extension: {ext}")
         return None
 
+
 def read_ods(file: UploadedFile | str) -> DataFrame | None:
     from odf.opendocument import load
     from odf.table import Table, TableRow, TableCell
@@ -55,10 +52,11 @@ def read_ods(file: UploadedFile | str) -> DataFrame | None:
         cell_values = []
         for cell in cells:
             paragraphs = cell.getElementsByType(P)
-            cell_value = ' '.join([paragraph.firstChild.data for paragraph in paragraphs if paragraph.firstChild is not None])
+            cell_value = ' '.join(
+                [paragraph.firstChild.data for paragraph in paragraphs
+                 if paragraph.firstChild is not None])
             cell_values.append(cell_value)
         rows.append(cell_values)
 
     df = pd.DataFrame(rows[1:], columns=rows[0])
     return df
-

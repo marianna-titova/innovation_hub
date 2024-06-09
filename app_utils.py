@@ -13,9 +13,11 @@ def get_downloads_folder() -> str:
     else:
         return os.path.join(os.path.expanduser('~'), 'Downloads')
 
+
 def upload_files() -> List[UploadedFile]:
     uploaded_files = st.file_uploader("Choose files", type=["csv", "xls", "xlsx", "ods"], accept_multiple_files=True)
     return uploaded_files
+
 
 def get_dataframes(uploaded_files: List[UploadedFile]) -> Tuple[List[DataFrame], List[str], Set[Any]]:
     dfs = []
@@ -32,13 +34,14 @@ def get_dataframes(uploaded_files: List[UploadedFile]) -> Tuple[List[DataFrame],
             continue
     return dfs, file_names, all_columns
 
-def save_file(files: List[UploadedFile], selected_columns: List[str]) -> None:
-    file_format = st.selectbox("Select output file format", [".csv", ".ods", ".xls", ".xlsx"])
+
+def save_file_simple(files: List[UploadedFile], selected_columns: List[str]) -> None:
+    file_format = st.selectbox("Select output file format", [".csv", ".ods", ".xls", ".xlsx"], key='simple_file_format')
     downloads_folder = get_downloads_folder()
     output_file_name_with_format = f"merged{file_format}"
     output_file_name = os.path.join(downloads_folder, output_file_name_with_format)
 
-    if st.button("Merge and save file"):
+    if st.button("Merge and save file", key='simple_merge_and_save'):
         try:
             output_file_name = execute_simple_merge(files, selected_columns, output_file_name)
             st.success(f"File saved successfully as {output_file_name}")
@@ -46,3 +49,11 @@ def save_file(files: List[UploadedFile], selected_columns: List[str]) -> None:
             st.dataframe(read_file(output_file_name).head(10))
         except Exception as e:
             st.error(f"Error merging and saving file: {e}")
+
+
+def preview_files(dataframes: List[DataFrame], file_names: List[str]) -> None:
+    tabs = st.tabs(file_names)
+    for i, tab in enumerate(tabs):
+        with tab:
+            st.write(f"Preview of {file_names[i]}")
+            st.dataframe(dataframes[i].head(5))

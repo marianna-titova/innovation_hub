@@ -1,4 +1,3 @@
-import pandas as pd
 from pandas import DataFrame
 import os
 from odf.opendocument import OpenDocumentSpreadsheet
@@ -17,6 +16,7 @@ def get_unique_file_name(output_path):
 
     return new_output_path
 
+
 def save_file(output_path: str, data: DataFrame) -> str | None:
     output_path = get_unique_file_name(output_path)
     ext = os.path.splitext(output_path)[1].lower()
@@ -31,6 +31,7 @@ def save_file(output_path: str, data: DataFrame) -> str | None:
         return None
     print(f"Merged file saved as {output_path}")
     return output_path
+
 
 def save_ods(output_path: str, data: DataFrame) -> None:
     doc = OpenDocumentSpreadsheet()

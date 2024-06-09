@@ -12,12 +12,21 @@ def execute_simple_merge(files: List[UploadedFile], columns: List[str], output_p
     """Merges multiple files and saves the DataFrame to a file"""
     return impl_execute_simple_merge(files, columns, output_path)
 
+
 def soph_merge_mode1(data: DataFrame, by: str) -> DataFrame:
     return soph_merge_mode1_impl(data, by)
 
-def soph_merge_mode2():
-    soph_merge_mode2_impl()
+
+def soph_merge_mode2(
+        dfs: List[DataFrame],
+        selected_items: List[int or str],
+        match_type: str,
+        choose_entries_by: str,
+        n: int = None,
+        k: int = None
+) -> DataFrame:
+    return soph_merge_mode2_impl(dfs, selected_items, match_type, choose_entries_by, n, k)
+
 
 def soph_merge_mode3():
     soph_merge_mode3_impl()
-

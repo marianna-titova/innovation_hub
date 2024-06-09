@@ -27,21 +27,26 @@ SOPHISTICATED_MERGE_MODES = {
     "mode1": {
         "title": "Transpose",
         "name": "transpose",
-        "description": "This mode provides functionality to choose columns/lines and transpose them. If there are multiple files you can choose if you want to save all in one file or different.",
+        "description":
+            "This mode provides functionality to choose columns/lines and transpose them. "
+            "If there are multiple files you can choose if you want to save all in one file or different.",
         "image": "static/sophisticated_merge.png",
         "function": run_soph_merge_mode1
     },
     "mode2": {
         "title": "Find by column entries",
         "name": "find by column entries",
-        "description": "This mode provides functionality to choose one or multiple columns and to find all columns which names are in entries of chosen column(s).",
+        "description":
+            "This mode provides functionality to choose one or multiple columns and to find all columns "
+            "which names are in entries of chosen column(s).",
         "image": "static/sophisticated_merge.png",
         "function": run_soph_merge_mode2
     },
     "mode3": {
         "title": "Find columns by word",
         "name": "find columns by word",
-        "description": "This mode provides functionality to choose all columns which name contains a word/number of the list.",
+        "description":
+            "This mode provides functionality to choose all columns which name contains a word/number of the list.",
         "image": "static/sophisticated_merge.png",
         "function": run_soph_merge_mode3
     },

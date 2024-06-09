@@ -12,4 +12,3 @@ def read_file(file: UploadedFile | str) -> DataFrame | None:
 def save_file(output_path: str, data: DataFrame) -> str:
     """Saves a DataFrame to a CSV/XLS/XLSX file."""
     return save_file_impl(output_path, data)
-
