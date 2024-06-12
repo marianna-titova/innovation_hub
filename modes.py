@@ -1,5 +1,6 @@
 
 from run_merge import run_soph_merge_mode1, run_soph_merge_mode2, run_soph_merge_mode3
+from run_filter import run_filter_mode1
 
 MERGE_MODES = {
     "simple": {
@@ -50,4 +51,15 @@ SOPHISTICATED_MERGE_MODES = {
         "image": "static/sophisticated_merge.png",
         "function": run_soph_merge_mode3
     },
+}
+
+FILTER_MODES = {
+    "mode1" : {
+        "title": "Chooses all entries with a word/collocation",
+        "name": "chooses all entries with a word/collocation",
+        "description":
+            "This mode provides functionality to choose all columns/lines which contain a word/collocation of the list.",
+        "image": "static/sophisticated_merge.png",
+        "function": run_filter_mode1
+    }
 }

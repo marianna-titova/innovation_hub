@@ -1,7 +1,7 @@
 import streamlit as st
 import os
 from app_utils import save_file_simple, upload_files, get_dataframes, preview_files
-from modes import MERGE_MODES, SOPHISTICATED_MERGE_MODES
+from modes import MERGE_MODES, SOPHISTICATED_MERGE_MODES, FILTER_MODES
 
 
 def choose_mode() -> str:
@@ -49,7 +49,7 @@ def run_simple_merge() -> None:
 
 
 def run_sophisticated_merge() -> None:
-    st.markdown("<h4>Select Sophisticated Merge Mode</h4>", unsafe_allow_html=True)
+    st.markdown("<h4>Select sophisticated merge mode</h4>", unsafe_allow_html=True)
     selected_sophisticated_mode = None
     if 'selected_sophisticated_mode' in st.session_state:
         selected_sophisticated_mode = st.session_state['selected_sophisticated_mode']
@@ -73,7 +73,27 @@ def run_sophisticated_merge() -> None:
 
 
 def run_filter() -> None:
-    pass
+    st.markdown("<h4>Select filter mode</h4>", unsafe_allow_html=True)
+    selected_filter_mode = None
+    if 'selected_filter_mode' in st.session_state:
+        selected_filter_mode = st.session_state['selected_filter_mode']
+
+    for mode_key, mode_info in FILTER_MODES.items():
+        cols = st.columns([1, 2])
+        with cols[0]:
+            st.image(mode_info['image'], use_column_width=True)
+            if st.button(f"Select {mode_info['name']}", key=f"soph_{mode_key}"):
+                selected_filter_mode = mode_key
+                st.session_state['selected_filter_mode'] = selected_filter_mode
+        with cols[1]:
+            st.markdown(f"#### {mode_info['title']}")
+            st.markdown(f"{mode_info['description']}")
+
+    if selected_filter_mode:
+        selected_mode_info = FILTER_MODES[selected_filter_mode]
+        st.markdown(f"<h4>{selected_mode_info['title']}</h4>", unsafe_allow_html=True)
+        mode_function = selected_mode_info['function']
+        mode_function()
 
 
 def main():

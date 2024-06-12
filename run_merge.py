@@ -1,10 +1,9 @@
 import streamlit as st
 from merge import soph_merge_mode1, soph_merge_mode2
 import os
-from app_utils import get_downloads_folder
 from file_management import save_file
 import pandas as pd
-from app_utils import upload_files, get_dataframes, preview_files
+from app_utils import upload_files, get_dataframes, preview_files, get_downloads_folder
 
 
 def run_soph_merge_mode1() -> None:
@@ -32,7 +31,7 @@ def run_soph_merge_mode1() -> None:
 
         save_to_separate_files = st.checkbox("Save to separate files")
 
-        if st.button("Transpose and Save"):
+        if st.button("Transpose and save"):
             if transpose_by == 'columns' and selected_columns:
                 transposed_dfs = [soph_merge_mode1(df[selected_columns], 'columns') for df in dfs]
             elif transpose_by == 'lines' and selected_lines:
