@@ -1,8 +1,7 @@
 from simple_merge_impl import (execute_simple_merge as impl_execute_simple_merge)
 from typing import List
 from sophisticated_merge_impl import (soph_merge_mode1 as soph_merge_mode1_impl,
-                                      soph_merge_mode2 as soph_merge_mode2_impl,
-                                      soph_merge_mode3 as soph_merge_mode3_impl)
+                                      soph_merge_mode2 as soph_merge_mode2_impl)
 
 from streamlit.runtime.uploaded_file_manager import UploadedFile
 from pandas import DataFrame
@@ -26,7 +25,3 @@ def soph_merge_mode2(
         k: int = None
 ) -> DataFrame:
     return soph_merge_mode2_impl(dfs, selected_items, match_type, choose_entries_by, n, k)
-
-
-def soph_merge_mode3():
-    soph_merge_mode3_impl()

@@ -46,7 +46,3 @@ def soph_merge_mode2(
     combined_df = pd.concat(merged_dfs, ignore_index=True) if merged_dfs else pd.DataFrame()
     cleaned_df = pd.DataFrame({col: combined_df[col].dropna().reset_index(drop=True) for col in combined_df.columns})
     return cleaned_df
-
-
-def soph_merge_mode3():
-    pass

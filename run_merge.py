@@ -4,6 +4,7 @@ import os
 from file_management import save_file
 import pandas as pd
 from app_utils import upload_files, get_dataframes, preview_files, get_downloads_folder
+from utils import rename_duplicate_columns, find_columns_by_name
 
 
 def run_soph_merge_mode1() -> None:
@@ -100,4 +101,26 @@ def run_soph_merge_mode2() -> None:
 
 
 def run_soph_merge_mode3() -> None:
-    pass
+    dfs, file_names, all_columns = [], [], set()
+    uploaded_files = upload_files()
+    if uploaded_files:
+        st.success("Files uploaded successfully!")
+        dfs, file_names, all_columns = get_dataframes(uploaded_files)
+        dfs = rename_duplicate_columns(dfs)
+        preview_files(dfs, file_names)
+
+        keywords_input = st.text_input("Enter words separated by commas")
+        if keywords_input:
+            keywords = [kw.strip() for kw in keywords_input.split(',')]
+            if st.button("Find and merge"):
+                combined_df = find_columns_by_name(dfs, keywords)
+                if not combined_df.empty:
+                    file_format = st.selectbox("Select output file format", [".csv", ".ods", ".xls", ".xlsx"],
+                                               key='mode')
+                    output_file_name = os.path.join(get_downloads_folder(), f"filtered{file_format}")
+                    save_file(output_file_name, combined_df)
+                    st.success(f"Combined file saved successfully as {output_file_name}")
+                    st.write("Preview of merged file")
+                    st.dataframe(combined_df.head(10))
+                else:
+                    st.error("No columns found with the given words.")
